@@ -23,7 +23,7 @@
     <ProjectReference Include="..\Services\ApiChatBot\ApiChatBot.csproj" />
   </ItemGroup>
 
-    <Target Name="RestoreNpm" BeforeTargets="Build" Condition=" '$(DesignTimeBuild)' != 'true' ">
+  <Target Name="RestoreNpm" BeforeTargets="Build" Condition=" '$(DesignTimeBuild)' != 'true' ">
     <ItemGroup>
       <PackageJsons Include="..\Frontends\*\package.json" />
     </ItemGroup>
