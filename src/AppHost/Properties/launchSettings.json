@@ -11,7 +11,7 @@
         "DOTNET_ENVIRONMENT": "Development",
         "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21213",
         "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22270",
-        "CHATBOT_USE_HTTP_ENDPOINTS": true
+        "CHATBOT_USE_HTTP_ENDPOINTS": "1"
       }
     },
     "http": {

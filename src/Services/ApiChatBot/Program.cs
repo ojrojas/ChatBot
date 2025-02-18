@@ -2,7 +2,6 @@ using BolunderErp.BuildingBlocks.Loggers;
 using ChatBot.BuildingBlocks.Loggers;
 using ChatBot.BuildingBlocks.ServiceDefaults;
 using ChatBot.Services.ApiChatBot;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.TextGeneration;
 using Serilog;
@@ -41,13 +40,20 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/api/chat",async (
+app.MapPost("/api/chat", async (
     MessageCompletion request,
-     ITextGenerationService textGenerationService
-) =>
+     ITextGenerationService textGenerationService) =>
 {
-    var prompt = $"Obtain the antonyms and synonyms of the following sentence: {request.message}";
-    return await textGenerationService.GetTextContentsAsync(prompt);
+    try
+    {
+        var prompt = $"Obtain the antonyms and synonyms of the following sentence: {request.message}";
+        return await textGenerationService.GetTextContentsAsync(prompt);
+    }
+    catch (Exception ex)
+    {
+
+        throw new Exception(ex.Message, ex);
+    }
 })
 .WithName("ChatBotExample")
 .WithOpenApi();
