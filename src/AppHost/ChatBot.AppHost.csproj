@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>5fdad70d-b874-4d16-a46e-96321ab4261a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.2" />
+    <PackageReference Include="Aspire.Hosting.NodeJs" Version="8.2.2" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.2.2" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="8.2.2" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="8.2.2" />
+    <PackageReference Include="Aspire.Hosting.Seq" Version="8.2.2" />
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Ollama" Version="9.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Services\ApiChatBot\ApiChatBot.csproj" />
+  </ItemGroup>
+
+    <Target Name="RestoreNpm" BeforeTargets="Build" Condition=" '$(DesignTimeBuild)' != 'true' ">
+    <ItemGroup>
+      <PackageJsons Include="..\Frontends\*\package.json" />
+    </ItemGroup>
+
+    <!-- Install npm packages if node_modules is missing -->
+    <Message Importance="Normal" Text="Installing npm packages for %(PackageJsons.RelativeDir)" Condition="!Exists('%(PackageJsons.RootDir)%(PackageJsons.Directory)/node_modules')" />
+    <Exec Command="npm install" WorkingDirectory="%(PackageJsons.RootDir)%(PackageJsons.Directory)" Condition="!Exists('%(PackageJsons.RootDir)%(PackageJsons.Directory)/node_modules')" />
+  </Target>
+
+</Project>
