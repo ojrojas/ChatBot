@@ -1,0 +1,36 @@
+server {
+    listen       ${PORT};
+    listen  [::]:${PORT};
+    server_name  localhost;
+
+    access_log  /var/log/nginx/server.access.log  main;
+
+    location / {
+        root /usr/share/nginx/html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /apichatbot {
+        proxy_pass ${services__apichatbot__http__0};
+        proxy_http_version 1.1;
+        proxy_ssl_server_name off;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        rewrite ^/api/apichatbot(/.*)$ $1 break;
+    }
+
+    location /seq {
+        proxy_pass ${ConnectionStrings__seq};
+        proxy_http_version 1.1;
+        proxy_ssl_server_name off;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        rewrite ^/api/seq(/.*)$ $1 break;
+    }
+
+    location /ollama {
+        proxy_pass ${ConnectionStrings__ollama-container};
+        proxy_http_version 1.1;
+        proxy_ssl_server_name off;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        rewrite ^/api/ollama(/.*)$ $1 break;
+    }
+}
