@@ -46,12 +46,11 @@ app.MapPost("/api/chat", async (
 {
     try
     {
-        var prompt = $"Obtain the antonyms and synonyms of the following sentence: {request.message}";
+        var prompt = $"everything that is below answer it with songs: {request.message}";
         return await textGenerationService.GetTextContentsAsync(prompt);
     }
     catch (Exception ex)
     {
-
         throw new Exception(ex.Message, ex);
     }
 })
