@@ -4,7 +4,7 @@
 
 ## requirements to run the project:
 * Docker or Podman
-* Dotnet SDK 8.0
+* Dotnet SDK 9.0 (change version from 8 to 9)
 * Nodejs 24+
 * NPM
     * @angular/cli
