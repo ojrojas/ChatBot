@@ -9,7 +9,7 @@ var redis = builder.AddRedis("redis");
 var launchProfileName = ShouldUseHttpForEndpoints(configuration) ? "http" : "https";
 
 var ollama = builder.AddOllama("ollama")
-.WithVolume("ollama", "/root/.ollama").WithOpenWebUI();
+.WithVolume("ollama-store", "/root/.ollama").WithOpenWebUI();
 
 var llamaModel = ollama.AddModel("llama", "llama3.2");
 
