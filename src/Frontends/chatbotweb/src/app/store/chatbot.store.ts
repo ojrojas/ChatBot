@@ -8,7 +8,7 @@
 
 import { patchState, signalState, signalStore, withMethods, withState } from "@ngrx/signals";
 import { setFulfilled, setPending, withRequestStatus } from "./request.status";
-import { IMessage } from "../core/models/messages.model";
+import { IMessage } from "../core/models/message.model";
 import { ChatService } from "../services/chat.service";
 import { inject } from "@angular/core";
 import { withLogger } from "./logger.store";

@@ -1,0 +1,10 @@
+<div class="chat-container">
+  <app-history-chat [messages]="messages"></app-history-chat>
+  <app-form-chat
+      (sendMessageEvent)="sendMessage($event)"
+      (providerChangeEvent)="onProviderChange($event)"
+      (modelChangeEvent)="onModelChange($event)"
+      [selectedProvider]="selectedProvider"
+      [selectedModel]="selectedModel"
+  ></app-form-chat>
+</div>

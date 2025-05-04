@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IResponseChatBot } from '../core/models/response-chatbot';
-import { IMessage } from '../core/models/messages.model';
+import { IMessage } from '../core/models/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,9 @@ export class ChatService {
 
   createMessage = (typeUser:string , toMessage: string) => {
     const message: IMessage = {
-      user: typeUser === 'Bot' ? 'Bot': 'User',
-      message: toMessage,
-      date: Date.now()
+      type: typeUser === 'Bot' ? 'Bot': 'User',
+      text: toMessage,
+      date: new Date()
     };
 
     return message;

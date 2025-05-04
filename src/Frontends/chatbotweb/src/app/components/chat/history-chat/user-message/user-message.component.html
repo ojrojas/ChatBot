@@ -1,0 +1,11 @@
+<li class="message user-message">
+  <div class="message-content-container">
+      <div class="message-info">
+          <span class="sender">{{ message.type === 'user' ? 'Tú' : message.type }}</span>
+          <span class="timestamp">{{ message.date.toLocaleString() }}</span>
+      </div>
+      <div class="message-content">
+          {{ message.text }}
+      </div>
+  </div>
+</li>
