@@ -1,18 +1,19 @@
 import { Routes } from '@angular/router';
-import { ChatComponent } from './pages/chat/chat.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { LayoutComponent } from './components/layout/layout.component';
 
 export const routes: Routes = [
     {
-        path:'chat',
-        component: ChatComponent
+        path:'layout',
+        component: LayoutComponent
     },
     {
         path:'',
-        redirectTo: 'chat',
+        redirectTo: 'layout',
         pathMatch: "full"
       },
       {
         path: '**',
-        redirectTo: 'chat',
+        redirectTo: 'layout',
       }
 ];

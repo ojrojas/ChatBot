@@ -8,7 +8,7 @@
 
 import { patchState, signalState, signalStore, withMethods, withState } from "@ngrx/signals";
 import { setFulfilled, setPending, withRequestStatus } from "./request.status";
-import { IMessage } from "../core/models/messages.model";
+import { IMessage } from "../core/models/message.model";
 import { ChatService } from "../services/chat.service";
 import { inject } from "@angular/core";
 import { withLogger } from "./logger.store";
@@ -20,42 +20,41 @@ import { withLogger } from "./logger.store";
 // }
 
 type ChatBotState = {
-    messages: IMessage[];
-    query: string;
+  messages: IMessage[];
+  query: string;
 }
 
 
 const chatbotState = signalState<ChatBotState>({
-    messages: [],
-    query: ''
+  messages: [],
+  query: ''
 });
 
 export const ChatBotStore = signalStore(
-    { providedIn: 'root' },
-    withState(chatbotState),
-    withLogger("ChatBot-Logger"),
-    withRequestStatus(),
-    withMethods((store, chatService = inject(ChatService)) => ({
-        sendMessage(message: string) {
-            patchState(store, {},setPending());
-            const messages = store.messages();
-            chatService.sendMessageToChatApi(message).subscribe({
-                next: response => {
-                    if (response.status === 200) {
-                        const message = chatService.createMessage("Bot", response.body![0].text!)
-                        messages.push(message);
-                        patchState(store, { messages: messages }, setFulfilled());
-                    }
-                }, error: (errorr) => console.error(errorr),
-                complete: () => console.debug("complete")
-            })
-        },
-        setMessageUser(message:string)
-        {
-            const messages = store.messages();
-            const messageUser = chatService.createMessage("User", message);
-            messages.push(messageUser);
-            patchState(store, { messages: messages });
-        }
-    }))
+  { providedIn: 'root' },
+  withState(chatbotState),
+  withLogger("ChatBot-Logger"),
+  withRequestStatus(),
+  withMethods((store, chatService = inject(ChatService)) => ({
+    sendMessage(message: string) {
+      patchState(store, {}, setPending());
+      const messages = store.messages();
+      chatService.sendMessageToChatApi(message).subscribe({
+        next: response => {
+          if (response.status === 200) {
+            const message = chatService.createMessage("bot", response.body![0].text!)
+            messages.push(message);
+            patchState(store, { messages: messages }, setFulfilled());
+          }
+        }, error: (errorr) => console.error(errorr),
+        complete: () => console.debug("complete")
+      })
+    },
+    setMessage(message: string, type: string) {
+      const messages = store.messages();
+      const messageUser = chatService.createMessage(type, message);
+      messages.push(messageUser);
+      patchState(store, { messages: messages });
+    }
+  }))
 );

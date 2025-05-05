@@ -1,0 +1,36 @@
+<div class="message-form-card">
+  <div class="card">
+      <div class="form-header">
+          <div class="dropdown-container">
+              <label for="provider">Provider:</label>
+              <select id="provider" [ngModel]="selectedProvider" (change)="onProviderSelectChange($event)">
+                  <option *ngFor="let provider of providers" [value]="provider">{{ provider }}</option>
+              </select>
+          </div>
+          <div class="dropdown-container">
+              <label for="model">Model:</label>
+              <select id="model" [ngModel]="selectedModel" (change)="onModelSelectChange($event)">
+                   <option *ngFor="let model of models" [value]="model">{{ model }}</option>
+              </select>
+          </div>
+      </div>
+
+      <div class="form-textarea">
+          <textarea
+              id="message-input"
+              placeholder="Ask me anything... 📝"
+              [(ngModel)]="messageInput"
+              (keypress)="onKeyPress($event)"
+          ></textarea>
+      </div>
+
+      <div class="form-buttons">
+          <div class="grouped-buttons">
+              <button><ng-icon name="matAttachFileOutline"/></button>
+              <button><ng-icon name="matMicOutline"/></button>
+              <button><ng-icon name="matDownloadOutline"/></button>
+          </div>
+          <button class="send-button" (click)="onSendMessage()">Send</button>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.message {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.message-content-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  align-items: flex-end;
+}
+
+.message-info {
+  font-size: 0.8em;
+  color: #8b949e;
+  margin-bottom: 3px;
+}
+
+.sender {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.message-content {
+  padding: 10px 15px;
+  border-radius: 8px;
+  word-wrap: break-word;
+  background-color: #39414a;
+  color: #e1e4e8;
+  box-shadow: none;
+  border: 1px solid #444c56;
+}

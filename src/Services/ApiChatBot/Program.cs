@@ -47,7 +47,7 @@ app.MapPost("/api/chat", async (
     try
     {
         Log.Logger.Information("Request to chatbot sendend");
-        var prompt = $"everything that is below answer it with songs: {request.message}";
+        var prompt = $"{PromptChat.SystemPrompt}: {request.message}";
         return await textGenerationService.GetTextContentsAsync(prompt);
     }
     catch (Exception ex)

@@ -1,0 +1,15 @@
+<div class="accordion">
+  <input type="checkbox" id="panel6" name="accordion" hidden />
+  <div class="expansion-panel">
+    <label for="panel6" class="expansion-panel-header">
+      <span>Lorem Ipsum</span>
+      <div class="expansion-panel-header--buttons">
+        <button><ng-icon name="matAttachFileOutline"/></button>
+        <button><ng-icon name="matSettingsOutline"/></button>
+      </div>
+    </label>
+    <div class="expansion-panel-content" *ngFor="let chat of chats">
+      <span>{{chat}}</span>
+    </div>
+  </div>
+</div>
