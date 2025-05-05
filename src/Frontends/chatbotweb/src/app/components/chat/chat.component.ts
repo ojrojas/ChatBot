@@ -11,23 +11,25 @@ import { FormChatComponent } from './form-chat/form-chat.component';
     HistoryChatComponent,
     FormChatComponent,
     FormsModule
-],
+  ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
 export class ChatComponent {
-  messages: IMessage[] = [];
   currentMessage: string = '';
   selectedProvider: string = 'provider1';
   selectedModel: string = 'model1';
+  chatStore = inject(ChatBotStore);
 
   constructor() {
-    this.messages.push({ type: 'bot', text: 'Hi!, How can I help you today? ✨', date: new Date() });
+    this.chatStore.messages();
+    this.chatStore.setMessage('Hi!, How can I help you today? ✨', 'bot');
   }
 
   sendMessage(messageContent: string) {
     if (messageContent.trim()) {
-      this.messages.push({ type: 'user', text: messageContent.trim()+"112", date: new Date() });
+      this.chatStore.setMessage(messageContent.trim(), 'user');
+      this.chatStore.sendMessage(messageContent);
       this.currentMessage = '';
     }
   }

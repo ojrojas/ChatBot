@@ -1,8 +1,9 @@
-import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { UserMessageComponent } from './user-message/user-message.component';
 import { BotMessageComponent } from './bot-message/bot-message.component';
 import { IMessage } from '../../../core/models/message.model';
 import { CommonModule } from '@angular/common';
+import { ChatBotStore } from '../../../store/chatbot.store';
 
 @Component({
   selector: 'app-history-chat',
@@ -17,6 +18,7 @@ import { CommonModule } from '@angular/common';
 export class HistoryChatComponent {
   @Input() messages: IMessage[] = [];
   @ViewChild('messageList') messageList!: ElementRef;
+  chatStore = inject(ChatBotStore);
 
   constructor() { }
 

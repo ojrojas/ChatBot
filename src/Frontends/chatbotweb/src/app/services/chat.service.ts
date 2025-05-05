@@ -16,9 +16,9 @@ export class ChatService {
     });
   }
 
-  createMessage = (typeUser:string , toMessage: string) => {
+  createMessage = (typeUser: string, toMessage: string) => {
     const message: IMessage = {
-      type: typeUser === 'Bot' ? 'Bot': 'User',
+      type: typeUser === 'bot' ? 'bot' : 'user',
       text: toMessage,
       date: new Date()
     };

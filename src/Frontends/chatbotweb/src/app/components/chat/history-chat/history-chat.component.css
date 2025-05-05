@@ -11,3 +11,40 @@
   padding: 0;
   margin: 0;
 }
+
+
+
+/* Estilos para el spinner en forma de línea */
+.spinner-line {
+  width: 80%; /* Ancho similar al del mensaje */
+  height: 4px; /* Altura del spinner */
+  margin-top: 5px; /* Espacio encima del spinner */
+  margin-left: 10px; /* Alineación a la izquierda */
+  overflow: hidden; /* Oculta la parte de la barra que está fuera */
+  position: relative; /* Necesario para posicionar la barra interna */
+  border-radius: 2px; /* Bordes redondeados para la línea */
+  background-color: #444c56; /* Color de fondo del spinner (base) */
+}
+
+.spinner-bar {
+  display: block;
+  height: 100%;
+  width: 30%; /* Ancho inicial de la barra animada */
+  background-color: #58a6ff; /* Color azul de GitHub Copilot */
+  position: absolute;
+  top: 0;
+  left: -30%; /* Empieza fuera de la vista */
+  animation: spinner-animation 1.5s linear infinite; /* Aplica la animación */
+}
+
+@keyframes spinner-animation {
+  0% {
+      left: -30%; /* Posición inicial */
+  }
+  50% {
+      left: 100%; /* Se mueve hacia la derecha */
+  }
+  100% {
+      left: -30%; /* Vuelve a la posición inicial para un bucle continuo */
+  }
+}

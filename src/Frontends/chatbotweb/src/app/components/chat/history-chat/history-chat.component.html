@@ -5,4 +5,7 @@
           <app-bot-message *ngIf="message.type === 'bot'" [message]="message"></app-bot-message>
       </ng-container>
   </ul>
+  <div class="spinner-line" *ngIf="this.chatStore.requestStatus() ==='pending'">
+    <div class="spinner-bar"></div>
+  </div>
 </div>

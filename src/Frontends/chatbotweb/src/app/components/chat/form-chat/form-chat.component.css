@@ -1,14 +1,14 @@
 .message-form-card {
   padding: 20px;
-  background-color: #24292e; /* Fondo del área del formulario */
+  background-color: #24292e;
 }
 
 .card {
-  background-color: #2f363d; /* Fondo de la "tarjeta" del formulario */
-  border-radius: 8px; /* Bordes más definidos */
+  background-color: #2f363d;
+  border-radius: 8px;
   padding: 20px;
-  box-shadow: none; /* Eliminar sombras */
-  border: 1px solid #444c56; /* Borde sutil */
+  box-shadow: none;
+  border: 1px solid #444c56;
 }
 
 .form-header {
@@ -24,17 +24,16 @@
 
 .dropdown-container label {
   margin-right: 10px;
-  color: #8b949e; /* Color de texto de la etiqueta */
+  color: #8b949e;
   font-weight: bold;
 }
 
-/* Estilo para los selectores */
 .dropdown-container select {
   padding: 8px 12px;
-  border: 1px solid #444c56; /* Borde sutil */
-  border-radius: 6px; /* Bordes redondeados */
-  background-color: #39414a; /* Fondo gris azulado oscuro */
-  color: #e1e4e8; /* Texto claro */
+  border: 1px solid #444c56;
+  border-radius: 6px;
+  background-color: #39414a;
+  color: #e1e4e8;
   outline: none;
   appearance: none;
   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%238b949e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha personalizada con color de texto */
@@ -42,12 +41,12 @@
   background-position: right 10px top 50%;
   background-size: 12px auto;
   padding-right: 30px;
-  box-shadow: none; /* Eliminar sombras */
+  box-shadow: none;
 }
 
 .dropdown-container select:focus {
-  border-color: #58a6ff; /* Color de enfoque azul */
-  box-shadow: none; /* Eliminar sombras */
+  border-color: #58a6ff;
+  box-shadow: none;
 }
 
 
@@ -55,23 +54,23 @@
   width: 100%;
   height: 100px;
   padding: 10px;
-  border: 1px solid #444c56; /* Borde sutil */
-  border-radius: 6px; /* Bordes redondeados */
+  border: 1px solid #444c56;
+  border-radius: 6px;
   resize: none;
   margin-bottom: 15px;
   box-sizing: border-box;
-  background-color: #39414a; /* Fondo gris azulado oscuro */
-  color: #e1e4e8; /* Texto claro */
-  box-shadow: none; /* Eliminar sombras */
+  background-color: #39414a;
+  color: #e1e4e8;
+  box-shadow: none;
 }
 
 .form-textarea textarea::placeholder {
-  color: #8b949e; /* Color del placeholder */
+  color: #8b949e;
 }
 
 .form-textarea textarea:focus {
-  border-color: #58a6ff; /* Color de enfoque azul */
-  box-shadow: none; /* Eliminar sombras */
+  border-color: #58a6ff;
+  box-shadow: none;
   outline: none;
 }
 
@@ -85,14 +84,14 @@
 .grouped-buttons button {
   margin-right: 10px;
   padding: 8px 12px;
-  border: 1px solid #444c56; /* Borde sutil */
-  border-radius: 6px; /* Bordes redondeados */
+  border: 1px solid #444c56;
+  border-radius: 6px;
   cursor: pointer;
-  background-color: #39414a; /* Fondo gris azulado oscuro */
-  color: #e1e4e8; /* Texto claro */
-  font-weight: normal; /* Peso de fuente normal */
-  box-shadow: none; /* Eliminar sombras */
-  transition: background-color 0.3s ease; /* Transición suave */
+  background-color: #39414a;
+  color: #e1e4e8;
+  font-weight: normal;
+  box-shadow: none;
+  transition: background-color 0.3s ease;
 }
 
 .grouped-buttons button:last-child {

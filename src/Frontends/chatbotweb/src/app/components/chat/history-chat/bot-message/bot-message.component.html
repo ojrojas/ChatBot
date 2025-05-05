@@ -1,13 +1,13 @@
 <li class="message bot-message">
   <div class="card">
-      <div class="message-content-container">
-          <div class="message-info">
-              <span class="sender">{{ message.type === 'bot' ? 'Bot' : message.type }}</span>
-              <span class="timestamp">{{ message.date.toLocaleString() }}</span>
-          </div>
-          <div class="message-content">
-              {{ message.text }}
-          </div>
+    <div class="message-content-container">
+      <div class="message-info">
+        <span class="sender">{{ message.type === 'bot' ? 'bot' : message.type }}</span>
+        <span class="timestamp">{{ message.date.toLocaleString() }}</span>
       </div>
+      <div class="message-content">
+        {{ message.text }}
+      </div>
+    </div>
   </div>
 </li>
