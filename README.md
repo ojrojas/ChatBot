@@ -72,7 +72,3 @@ To set up this project, follow these steps:
 **License**
 
 This project is licensed under [MIT License].
-
----
-
-Note: Please replace `ojrojas` with the actual username associated with the repository."
