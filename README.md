@@ -55,8 +55,8 @@ To set up this project, follow these steps:
 
 **API Documentation**
 
-*   [C# Backend API](https://ojrojas.github.io/chatbot/api/)
-*   [Angular Frontend API](https://ojrojas.github.io/chatbot/frontend/api/)
+*   [C# Backend API] -- pending 
+*   [Angular Frontend API] -- pending
 
 **Commit Message Guidelines**
 
