@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IMessage } from '../../../../core/models/message.model';
 import { CommonModule } from '@angular/common';
 
@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-bot-message',
   imports: [
     CommonModule
-  ],
+],
   templateUrl: './bot-message.component.html',
   styleUrl: './bot-message.component.css'
 })

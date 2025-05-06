@@ -13,12 +13,6 @@ import { ChatService } from "../services/chat.service";
 import { inject } from "@angular/core";
 import { withLogger } from "./logger.store";
 
-// type CatalogsState = {
-//   paginationResponse: IPaginationResponse | undefined;
-//   catalogItemResponse: IGetCatalogItemByIdResponse | undefined;
-//   query: string;
-// }
-
 type ChatBotState = {
   messages: IMessage[];
   query: string;
@@ -39,10 +33,14 @@ export const ChatBotStore = signalStore(
     sendMessage(message: string) {
       patchState(store, {}, setPending());
       const messages = store.messages();
-      chatService.sendMessageToChatApi(message).subscribe({
+      chatService.sendMessageToChatApi(JSON.stringify(messages)).subscribe({
         next: response => {
           if (response.status === 200) {
-            const message = chatService.createMessage("bot", response.body![0].text!)
+            let itemResponse = '';
+            response.body?.forEach(item => {
+              itemResponse += item.content;
+            });
+            const message = chatService.createMessage("assistant", itemResponse!);
             messages.push(message);
             patchState(store, { messages: messages }, setFulfilled());
           }

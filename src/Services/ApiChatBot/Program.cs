@@ -2,6 +2,8 @@ using BolunderErp.BuildingBlocks.Loggers;
 using ChatBot.BuildingBlocks.Loggers;
 using ChatBot.BuildingBlocks.ServiceDefaults;
 using ChatBot.Services.ApiChatBot;
+using ChatBot.Services.ApiChatBot.Apis;
+using ChatBot.Services.ApiChatBot.DI;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.TextGeneration;
 using Serilog;
@@ -26,7 +28,7 @@ var connectionString = builder.Configuration.GetConnectionString("llama");
 var ollamaConnection = new OllamaConnection(connectionString);
 
 #pragma warning disable SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-kernel.AddOllamaTextGeneration(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));
+kernel.AddOllamaChatCompletion(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));
 #pragma warning restore SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
 var app = builder.Build();
@@ -40,22 +42,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/api/chat", async (
-    MessageCompletion request,
-     ITextGenerationService textGenerationService) =>
-{
-    try
-    {
-        Log.Logger.Information("Request to chatbot sendend");
-        var prompt = $"{PromptChat.SystemPrompt}: {request.message}";
-        return await textGenerationService.GetTextContentsAsync(prompt);
-    }
-    catch (Exception ex)
-    {
-        throw new Exception(ex.Message, ex);
-    }
-})
-.WithName("ChatBotExample")
-.WithOpenApi();
+app .ChatCompletionEndpointV1();
 
 app.Run();

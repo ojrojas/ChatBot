@@ -18,9 +18,8 @@ export class ChatService {
 
   createMessage = (typeUser: string, toMessage: string) => {
     const message: IMessage = {
-      type: typeUser === 'bot' ? 'bot' : 'user',
-      text: toMessage,
-      date: new Date()
+      role: typeUser === 'assistant' ? 'assistant' : 'user',
+      content: toMessage,
     };
 
     return message;

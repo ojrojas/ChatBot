@@ -1,5 +1,4 @@
 export interface IMessage {
-  text: string;
-  type: string;
-  date: Date;
+  content: string;
+  role: string;
 }

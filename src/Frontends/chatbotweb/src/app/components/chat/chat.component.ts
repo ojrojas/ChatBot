@@ -23,7 +23,7 @@ export class ChatComponent {
 
   constructor() {
     this.chatStore.messages();
-    this.chatStore.setMessage('Hi!, How can I help you today? ✨', 'bot');
+    this.chatStore.setMessage('Hi!, How can I help you today? ✨', 'assistant');
   }
 
   sendMessage(messageContent: string) {
