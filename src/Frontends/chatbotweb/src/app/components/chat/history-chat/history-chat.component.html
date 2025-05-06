@@ -1,8 +1,8 @@
 <div class="chat-history" #messageList>
   <ul id="message-list">
       <ng-container *ngFor="let message of messages">
-          <app-user-message *ngIf="message.type === 'user'" [message]="message"></app-user-message>
-          <app-bot-message *ngIf="message.type === 'bot'" [message]="message"></app-bot-message>
+          <app-user-message *ngIf="message.role === 'user'" [message]="message"></app-user-message>
+          <app-bot-message *ngIf="message.role === 'assistant'" [message]="message"></app-bot-message>
       </ng-container>
   </ul>
   <div class="spinner-line" *ngIf="this.chatStore.requestStatus() ==='pending'">

@@ -2,11 +2,11 @@
   <div class="card">
     <div class="message-content-container">
       <div class="message-info">
-        <span class="sender">{{ message.type === 'bot' ? 'bot' : message.type }}</span>
-        <span class="timestamp">{{ message.date.toLocaleString() }}</span>
+        <span class="sender">{{ message.role === 'assistant' ? 'Bot' : message.role }}</span>
+        <!-- <span class="timestamp">{{ message.date.toLocaleString() }}</span> -->
       </div>
       <div class="message-content">
-        {{ message.text }}
+        {{ message.content }}
       </div>
     </div>
   </div>
