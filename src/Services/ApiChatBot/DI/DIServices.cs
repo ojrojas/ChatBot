@@ -1,12 +1,27 @@
-using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.Extensions.AI;
+using OllamaSharp;
 
 namespace ChatBot.Services.ApiChatBot.DI;
 
 public static class ApplicationServiceDI
 {
-    public static IServiceCollection AddServiceDIInjection(this IServiceCollection services)
+    public static IServiceCollection AddServiceDIInjection(this IServiceCollection services, OllamaConnection connection)
     {
-        services.AddScoped<IChatCompletionService, IChatCompletionService>();
+        services.AddKeyedSingleton<IOllamaApiClient>(null, implementationFactory: (provider, _) => {
+             var loggerFactory = provider.GetService<ILoggerFactory>();
+
+            var builder = ((IChatClient)new OllamaApiClient(connection.Endpoint, connection.Model))
+                .AsBuilder()
+                .UseFunctionInvocation(loggerFactory, config => config.MaximumIterationsPerRequest = 128);
+
+            if (loggerFactory is not null)
+            {
+                builder.UseLogging(loggerFactory);
+            }
+
+            var client =  builder.Build(provider);
+            return client is OllamaApiClient apiClient ? apiClient : new OllamaApiClient(connection.Endpoint, connection.Model);
+        });
         return services;
     }
 }

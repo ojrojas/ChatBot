@@ -27,6 +27,8 @@ Log.Logger = LoggerPrinter.CreateSerilogLogger("api", "apichatbot", configuratio
 var connectionString = builder.Configuration.GetConnectionString("llama");
 var ollamaConnection = new OllamaConnection(connectionString);
 
+builder.Services.AddServiceDIInjection(ollamaConnection);
+
 #pragma warning disable SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 kernel.AddOllamaChatCompletion(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));
 #pragma warning restore SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
@@ -42,6 +44,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app .ChatCompletionEndpointV1();
+app.ChatCompletionEndpointV1();
 
 app.Run();

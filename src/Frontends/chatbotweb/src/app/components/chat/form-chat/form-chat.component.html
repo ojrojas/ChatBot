@@ -10,7 +10,7 @@
           <div class="dropdown-container">
               <label for="model">Model:</label>
               <select id="model" [ngModel]="selectedModel" (change)="onModelSelectChange($event)">
-                   <option *ngFor="let model of models" [value]="model">{{ model }}</option>
+                   <option *ngFor="let model of chatStore.models()" [value]="model.name">{{ model.name }}</option>
               </select>
           </div>
       </div>

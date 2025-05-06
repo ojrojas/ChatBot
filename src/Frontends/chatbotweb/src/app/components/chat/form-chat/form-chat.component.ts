@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { matAttachFileOutline, matDownloadOutline, matMicOutline } from "@ng-icons/material-icons/outline";
+import { ChatBotStore } from '../../../store/chatbot.store';
 
 @Component({
   selector: 'app-form-chat',
@@ -16,6 +17,7 @@ import { matAttachFileOutline, matDownloadOutline, matMicOutline } from "@ng-ico
   viewProviders: [provideIcons({ matAttachFileOutline, matDownloadOutline, matMicOutline })]
 })
 export class FormChatComponent {
+  readonly chatStore = inject(ChatBotStore);
   @Input() selectedProvider: string = 'provider1';
   @Input() selectedModel: string = 'model1';
   @Output() sendMessageEvent = new EventEmitter<string>();
@@ -26,7 +28,9 @@ export class FormChatComponent {
   providers: string[] = ['provider1', 'provider2', 'provider3'];
   models: string[] = ['model1', 'model2', 'model3'];
 
-  constructor() { }
+  constructor() {
+    this.chatStore.getListModels();
+  }
 
   onSendMessage() {
     this.sendMessageEvent.emit(this.messageInput);

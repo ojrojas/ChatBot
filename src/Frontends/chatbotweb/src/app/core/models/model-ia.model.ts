@@ -1,5 +1,14 @@
 export interface IModel {
-  provider:string;
-  name:string;
-  tag?:string;
+  name: string;
+  modified_at: Date;
+  size: number;
+  digest: string;
+  details: {
+    parent_model: string;
+    format: string;
+    family: string;
+    families: string[];
+    parameter_size: string;
+    quantization_level: string;
+  }
 }
