@@ -1,11 +1,3 @@
-// import { patchState, signalState, signalStore, withMethods, withState } from '@ngrx/signals';
-// import { setFulfilled, setPending, withRequestStatus } from "./request.status.store";
-// import { CatalogsService } from "../services/catalogs.service";
-// import { inject, isDevMode } from "@angular/core";
-// import { LoggerService } from "../services/loggers.service";
-// import { IPaginationResponse } from "../dtos/paginate.response.dto";
-// import { IGetCatalogItemByIdResponse } from "../dtos/getcatalogitembyidresponse.dto";
-
 import { patchState, signalState, signalStore, withHooks, withMethods, withState } from "@ngrx/signals";
 import { setFulfilled, setPending, withRequestStatus } from "./request.status";
 import { IMessage } from "../core/models/message.model";
@@ -19,7 +11,6 @@ type ChatBotState = {
   messages: IMessage[];
   models: IModel[];
 }
-
 
 const chatbotState = signalState<ChatBotState>({
   messages: [],
