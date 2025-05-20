@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-configure-chat',
   imports: [],
   templateUrl: './configure-chat.component.html',
-  styleUrl: './configure-chat.component.css'
+  styleUrl: './configure-chat.component.scss'
 })
 export class ConfigureChatComponent {
 

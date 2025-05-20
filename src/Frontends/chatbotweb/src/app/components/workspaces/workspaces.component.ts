@@ -5,7 +5,7 @@ import { WorkspacesListComponent } from "./workspaces-list/workspaces-list.compo
   selector: 'app-workspaces',
   imports: [WorkspacesListComponent],
   templateUrl: './workspaces.component.html',
-  styleUrl: './workspaces.component.css'
+  styleUrl: './workspaces.component.scss'
 })
 export class WorkspacesComponent {
 

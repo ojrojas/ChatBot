@@ -65,7 +65,7 @@ export const ChatBotStore = signalStore(
         next: response => {
           if (response.status === 200) {
             patchState(store, { models: response.body! }, setFulfilled());
-            localStorage.setItem('chat-bot', JSON.stringify(chatbotState()));
+            storageService.setItem('chat-bot', JSON.stringify(chatbotState()));
           }
         }, error: (errorr) => console.error(errorr),
         complete: () => console.debug("complete")
@@ -76,10 +76,10 @@ export const ChatBotStore = signalStore(
     onInit: (store) => {
       const storageService = inject(StorageService);
       const storageState = storageService.getItem('chat-bot');
-      if (storageState !== null && storageState !== 'undefined') {
+      if (storageState !== null && storageState !== undefined) {
         const jsonObject = JSON.parse(storageState)
         store.setStateStorage(jsonObject as ChatBotState);
       }
     }
-  }),
+  })
 );

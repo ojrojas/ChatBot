@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
 ],
   templateUrl: './bot-message.component.html',
-  styleUrl: './bot-message.component.css'
+  styleUrl: './bot-message.component.scss'
 })
 export class BotMessageComponent {
   @Input() message!: IMessage;

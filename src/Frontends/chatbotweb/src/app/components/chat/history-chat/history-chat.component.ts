@@ -13,7 +13,7 @@ import { ChatBotStore } from '../../../store/chatbot.store';
     CommonModule
   ],
   templateUrl: './history-chat.component.html',
-  styleUrl: './history-chat.component.css'
+  styleUrl: './history-chat.component.scss'
 })
 export class HistoryChatComponent {
   @Input() messages: IMessage[] = [];
