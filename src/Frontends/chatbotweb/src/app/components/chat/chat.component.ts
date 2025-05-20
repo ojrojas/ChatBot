@@ -30,7 +30,7 @@ export class ChatComponent {
   sendMessage(messageContent: string) {
     if (messageContent.trim()) {
       this.chatStore.setMessage(messageContent.trim(), 'user');
-      this.chatStore.sendMessage(messageContent);
+      this.chatStore.sendMessage({ message: messageContent, model: this.selectedModel}, this.selectedProvider);
       this.currentMessage = '';
     }
   }

@@ -1,6 +1,3 @@
-using Microsoft.Extensions.AI;
-using OllamaSharp;
-
 namespace ChatBot.Services.ApiChatBot.DI;
 
 public static class ApplicationServiceDI
@@ -9,6 +6,9 @@ public static class ApplicationServiceDI
     {
         services.AddKeyedSingleton<IOllamaApiClient>(null, implementationFactory: (provider, _) => {
              var loggerFactory = provider.GetService<ILoggerFactory>();
+
+            ArgumentNullException.ThrowIfNull(connection.Endpoint);
+            ArgumentNullException.ThrowIfNull(connection.Model);
 
             var builder = ((IChatClient)new OllamaApiClient(connection.Endpoint, connection.Model))
                 .AsBuilder()
@@ -22,6 +22,8 @@ public static class ApplicationServiceDI
             var client =  builder.Build(provider);
             return client is OllamaApiClient apiClient ? apiClient : new OllamaApiClient(connection.Endpoint, connection.Model);
         });
+
+        services.AddTransient<IChatBotService, ChatBotService>();
         return services;
     }
 }

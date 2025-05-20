@@ -2,7 +2,7 @@
   <div class="card">
       <div class="form-header">
           <div class="dropdown-container">
-              <label for="provider">Provider:</label>
+              <label for="provider">Mode:</label>
               <select id="provider" [ngModel]="selectedProvider" (change)="onProviderSelectChange($event)">
                   <option *ngFor="let provider of providers" [value]="provider">{{ provider }}</option>
               </select>
@@ -21,6 +21,7 @@
               placeholder="Ask me anything... 📝"
               [(ngModel)]="messageInput"
               (keypress)="onKeyPress($event)"
+              disabled="{{disableTextArea}}"
           ></textarea>
       </div>
 

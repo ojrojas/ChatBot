@@ -6,6 +6,7 @@ import { inject } from "@angular/core";
 import { withLogger } from "./logger.store";
 import { StorageService } from "../services/storage.service";
 import { IModel } from "../core/models/model-ia.model";
+import { IModelCompletion } from "../core/models/model.completion";
 
 type ChatBotState = {
   messages: IMessage[];
@@ -23,15 +24,18 @@ export const ChatBotStore = signalStore(
   withLogger("ChatBot-Logger"),
   withRequestStatus(),
   withMethods((store, chatService = inject(ChatService), storageService = inject(StorageService)) => ({
-    sendMessage(message: string) {
+    sendMessage(modelCompletion: IModelCompletion, type: string) {
       patchState(store, {}, setPending());
       const messages = store.messages();
-      chatService.sendMessageToChatApi(JSON.stringify(messages)).subscribe({
+      chatService.sendMessageToChatApi(modelCompletion, type).subscribe({
         next: response => {
           if (response.status === 200) {
             let itemResponse = '';
             response.body?.forEach(item => {
-              itemResponse += item.content;
+              if (type === 'Chat')
+                itemResponse += item.content;
+              else
+                itemResponse += item.text
             });
             const message = chatService.createMessage("assistant", itemResponse!);
             messages.push(message);
@@ -66,7 +70,6 @@ export const ChatBotStore = signalStore(
         }, error: (errorr) => console.error(errorr),
         complete: () => console.debug("complete")
       })
-
     }
   })),
   withHooks({

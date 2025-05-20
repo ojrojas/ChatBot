@@ -18,15 +18,16 @@ import { ChatBotStore } from '../../../store/chatbot.store';
 })
 export class FormChatComponent {
   readonly chatStore = inject(ChatBotStore);
-  @Input() selectedProvider: string = 'provider1';
-  @Input() selectedModel: string = 'model1';
+  @Input() selectedProvider: string = '';
+  @Input() selectedModel: string = '';
   @Output() sendMessageEvent = new EventEmitter<string>();
   @Output() providerChangeEvent = new EventEmitter<string>();
   @Output() modelChangeEvent = new EventEmitter<string>();
   messageInput: string = '';
 
-  providers: string[] = ['provider1', 'provider2', 'provider3'];
-  models: string[] = ['model1', 'model2', 'model3'];
+  providers: string[] = ['Chat', 'Generate'];
+  models: string[] = [];
+  disableTextArea = true;
 
   constructor() {
     this.chatStore.getListModels();
@@ -40,11 +41,15 @@ export class FormChatComponent {
   onProviderSelectChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.providerChangeEvent.emit(target.value);
+    if(this.selectedModel.length> 1 && this.selectedProvider.length>1)
+        this.disableTextArea = false;
   }
 
   onModelSelectChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.modelChangeEvent.emit(target.value);
+    if(this.selectedModel.length> 1 && this.selectedProvider.length>1)
+        this.disableTextArea = false;
   }
 
   onKeyPress(event: KeyboardEvent) {

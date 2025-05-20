@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IResponseChatBot } from '../core/models/response-chatbot';
 import { IMessage } from '../core/models/message.model';
 import { IModel } from '../core/models/model-ia.model';
+import { IModelCompletion } from '../core/models/model.completion';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,15 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
-  sendMessageToChatApi = (message: string) => {
-    return this.http.post<IResponseChatBot[]>("/apichatbot/api/chat", { message: message }, {
-      observe: 'response'
-    });
+  sendMessageToChatApi = (modelCompletion: IModelCompletion, type: string) => {
+    if (type === 'Chat')
+      return this.http.post<IResponseChatBot[]>("/apichatbot/api/chat", modelCompletion, {
+        observe: 'response'
+      });
+    else
+      return this.http.post<IResponseChatBot[]>("/apichatbot/api/generate", modelCompletion, {
+        observe: 'response'
+      });
   }
 
   listModels = () => {

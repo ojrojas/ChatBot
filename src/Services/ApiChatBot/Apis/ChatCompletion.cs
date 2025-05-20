@@ -1,12 +1,6 @@
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
-using OllamaSharp;
-using OllamaSharp.Models;
-using Serilog;
 
 namespace ChatBot.Services.ApiChatBot.Apis;
+
 public static class ChatCompletionApi
 {
     public static RouteGroupBuilder ChatCompletionEndpointV1(this IEndpointRouteBuilder routeBuilder)
@@ -15,31 +9,40 @@ public static class ChatCompletionApi
 
         api.MapPost("/api/chat", ChatCompletion).WithName("ChatBotCompletion").WithOpenApi();
         api.MapGet("/api/models", GetModels).WithName("ChatBotModels").WithOpenApi();
+        api.MapPost("/api/generate", GenerateContent).WithName("ChatBotGenerate").WithOpenApi();
 
 
         return api;
 
-        static async ValueTask<IEnumerable<Model>> GetModels(
-            HttpContext context,
-            IOllamaApiClient apiClient
-        )
+    }
+    static async ValueTask<IEnumerable<Model>> GetModels([FromServices] IChatBotService service)
+    {
+        return await service.GetModelsAsync();
+    }
+
+    static async IAsyncEnumerable<StreamingChatMessageContent> ChatCompletion(
+        HttpContext context,
+        [FromBody] MessageCompletion request,
+        [FromServices] IChatBotService service, [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        Log.Logger.Information("Request message sended");
+        
+        await foreach (var response in service.GetStreamingChatMessageContentsAsync(request, cancellationToken))
         {
-            return await apiClient.ListLocalModelsAsync();
+            yield return response;
         }
+    }
 
-        static async IAsyncEnumerable<StreamingChatMessageContent> ChatCompletion(
-            HttpContext context,
-            [FromBody] MessageCompletion request,
-            [FromServices] IChatCompletionService chatCompletionService)
+    private static async IAsyncEnumerable<StreamingTextContent> GenerateContent(
+        [FromBody] MessageCompletion request,
+        [FromServices] IChatBotService service,
+        [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        Log.Logger.Information("Request message sended");
+
+        await foreach (var response in service.GetTextContentsAsync(request, cancellationToken))
         {
-            Log.Logger.Information("Request message sended");
-            var prompt = $"{PromptChat.SystemPrompt}: {request.message}";
-
-            await foreach (var result in chatCompletionService.GetStreamingChatMessageContentsAsync(prompt))
-            {
-                yield return result;
-            }
+            yield return response;
         }
-
     }
 }

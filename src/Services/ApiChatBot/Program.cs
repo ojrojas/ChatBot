@@ -1,13 +1,3 @@
-using BolunderErp.BuildingBlocks.Loggers;
-using ChatBot.BuildingBlocks.Loggers;
-using ChatBot.BuildingBlocks.ServiceDefaults;
-using ChatBot.Services.ApiChatBot;
-using ChatBot.Services.ApiChatBot.Apis;
-using ChatBot.Services.ApiChatBot.DI;
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.TextGeneration;
-using Serilog;
-
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = builder.Configuration;
 
@@ -31,6 +21,7 @@ builder.Services.AddServiceDIInjection(ollamaConnection);
 
 #pragma warning disable SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 kernel.AddOllamaChatCompletion(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));
+kernel.AddOllamaTextGeneration(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));
 #pragma warning restore SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
 var app = builder.Build();
