@@ -1,6 +1,6 @@
 .chat-container {
   display: grid;
-  width: 100vh;
+  width: 1024px;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
   "chat-container-history"
@@ -9,8 +9,8 @@
 }
 
 .chat-container-history{
-  overflow: scroll;
   grid-area: chat-container-history;
+  height: 550px;
 }
 
 .chat-container-form{

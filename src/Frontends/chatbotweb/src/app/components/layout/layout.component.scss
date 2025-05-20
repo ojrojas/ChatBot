@@ -1,5 +1,6 @@
 .drawer-container {
   height: 100vh;
+  background-color: gainsboro;
 }
 
 .sidenav-content {
@@ -21,9 +22,9 @@
 .sidenav-content-app {
   grid-area: sidenav-content-app;
   display: grid;
-  grid-template-columns: 4fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "chat-container chat-container"
+    "chat-container "
 }
 
 .workspace-container {

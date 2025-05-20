@@ -1,4 +1,4 @@
-<div class="chat-history" #messageList>
+<mat-card class="chat-history" #messageList>
   <ul id="message-list">
       <ng-container *ngFor="let message of messages">
           <app-user-message *ngIf="message.role === 'user'" [message]="message"></app-user-message>
@@ -8,4 +8,4 @@
   <div class="spinner-line" *ngIf="this.chatStore.requestStatus() ==='pending'">
     <div class="spinner-bar"></div>
   </div>
-</div>
+</mat-card>

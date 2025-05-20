@@ -4,13 +4,15 @@ import { BotMessageComponent } from './bot-message/bot-message.component';
 import { IMessage } from '../../../core/models/message.model';
 import { CommonModule } from '@angular/common';
 import { ChatBotStore } from '../../../store/chatbot.store';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-history-chat',
   imports: [
     UserMessageComponent,
     BotMessageComponent,
-    CommonModule
+    CommonModule,
+    MatCardModule
   ],
   templateUrl: './history-chat.component.html',
   styleUrl: './history-chat.component.scss'

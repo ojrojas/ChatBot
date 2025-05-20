@@ -1,5 +1,5 @@
 <mat-card appearance="outlined" class="message-form-card">
-  <mat-card-header>
+  <mat-card-header class="message-form-header">
     <mat-form-field appearance="outline">
       <mat-label for="provider">Mode</mat-label>
       <mat-select id="provider" [ngModel]="selectedProvider" (change)="onProviderSelectChange($event)">
@@ -13,24 +13,24 @@
       </mat-select>
     </mat-form-field>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content class="message-form-content">
     <mat-form-field class="form-textarea" appearance="outline">
       <mat-label for="model">Ask me anything... 📝</mat-label>
       <textarea matInput id="message-input" rows="4" [(ngModel)]="messageInput"
         (keypress)="onKeyPress($event)"></textarea>
     </mat-form-field>
   </mat-card-content>
-  <mat-card-actions>
-    <div class="form-buttons">
+  <mat-card-footer class="message-form-actions">
       <div class="grouped-buttons">
         <button mat-mini-fab
           aria-label="Example icon button with a delete icon"><mat-icon>attachment</mat-icon></button>
         <button mat-mini-fab><mat-icon>mic</mat-icon></button>
         <button mat-mini-fab><mat-icon>download</mat-icon></button>
       </div>
-      <button mat-mini-fab exntend class="send-button" (click)="onSendMessage()">
-        <mat-icon>send</mat-icon>
-      </button>
-    </div>
-  </mat-card-actions>
+      <div class="send-button">
+        <button mat-mini-fab exntend  (click)="onSendMessage()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+  </mat-card-footer>
 </mat-card>

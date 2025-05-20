@@ -49,6 +49,7 @@ export class FormChatComponent {
 
   onProviderSelectChange(event: Event) {
     const target = event.target as HTMLSelectElement;
+    console.log("provider selected:", target);
     this.providerChangeEvent.emit(target.value);
   }
 
