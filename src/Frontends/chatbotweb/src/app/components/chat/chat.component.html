@@ -1,6 +1,6 @@
 <div class="chat-container">
-  <app-history-chat [messages]="this.chatStore.messages()" />
-  <app-form-chat
+  <app-history-chat class="chat-container-history" [messages]="this.chatStore.messages()" />
+  <app-form-chat class="chat-container-form"
       (sendMessageEvent)="sendMessage($event)"
       (providerChangeEvent)="onProviderChange($event)"
       (modelChangeEvent)="onModelChange($event)"

@@ -1,5 +1,6 @@
 <mat-drawer-container class="drawer-container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side">
+    <app-workspaces class="workspace-container" />
   </mat-drawer>
   <div class="sidenav-content">
     <mat-toolbar class="sidenav-menu">
@@ -11,7 +12,6 @@
       <span class="spacer"></span>
     </mat-toolbar>
     <div class="sidenav-content-app">
-      <app-workspaces class="workspace-container" />
       <div class="chat-container">
         <app-chat class="chat-app-container" />
       </div>

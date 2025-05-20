@@ -1,7 +1,20 @@
 .chat-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   width: 100vh;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+  "chat-container-history"
+  "chat-container-history"
+  "chat-container-form";
+}
+
+.chat-container-history{
+  overflow: scroll;
+  grid-area: chat-container-history;
+}
+
+.chat-container-form{
+  grid-area: chat-container-form;
 }
 
 app-history-chat {
