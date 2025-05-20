@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { matAttachFileOutline, matDownloadOutline, matMicOutline } from "@ng-icons/material-icons/outline";
+import { ChatBotStore } from '../../../store/chatbot.store';
 
 @Component({
   selector: 'app-form-chat',
@@ -16,17 +17,21 @@ import { matAttachFileOutline, matDownloadOutline, matMicOutline } from "@ng-ico
   viewProviders: [provideIcons({ matAttachFileOutline, matDownloadOutline, matMicOutline })]
 })
 export class FormChatComponent {
-  @Input() selectedProvider: string = 'provider1';
-  @Input() selectedModel: string = 'model1';
+  readonly chatStore = inject(ChatBotStore);
+  @Input() selectedProvider: string = '';
+  @Input() selectedModel: string = '';
   @Output() sendMessageEvent = new EventEmitter<string>();
   @Output() providerChangeEvent = new EventEmitter<string>();
   @Output() modelChangeEvent = new EventEmitter<string>();
   messageInput: string = '';
 
-  providers: string[] = ['provider1', 'provider2', 'provider3'];
-  models: string[] = ['model1', 'model2', 'model3'];
+  providers: string[] = ['Chat', 'Generate'];
+  models: string[] = [];
+  disableTextArea = true;
 
-  constructor() { }
+  constructor() {
+    this.chatStore.getListModels();
+  }
 
   onSendMessage() {
     this.sendMessageEvent.emit(this.messageInput);
@@ -36,11 +41,15 @@ export class FormChatComponent {
   onProviderSelectChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.providerChangeEvent.emit(target.value);
+    if(this.selectedModel.length> 1 && this.selectedProvider.length>1)
+        this.disableTextArea = false;
   }
 
   onModelSelectChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.modelChangeEvent.emit(target.value);
+    if(this.selectedModel.length> 1 && this.selectedProvider.length>1)
+        this.disableTextArea = false;
   }
 
   onKeyPress(event: KeyboardEvent) {

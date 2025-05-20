@@ -1,6 +1,21 @@
-<div class="container">
-  <app-workspaces class="workspace-container"/>
-  <div class="chat-container">
-    <app-chat class="chat-app-container" />
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+  </mat-drawer>
+  <div class="sidenav-content">
+    <mat-toolbar>
+      <button mat-icon-button class="sidenav-icon" aria-label="Meni icon chatbot"
+        (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>ChatBot App</span>
+      <span class="spacer"></span>
+    </mat-toolbar>
+    <div class="container">
+      <app-workspaces class="workspace-container" />
+      <div class="chat-container">
+        <app-chat class="chat-app-container" />
+      </div>
+    </div>
   </div>
-</div>
+
+</mat-drawer-container>

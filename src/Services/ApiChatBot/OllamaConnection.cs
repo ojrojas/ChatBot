@@ -13,4 +13,4 @@ public record OllamaConnection(string connections)
     public string? Model => connection["Model"].ToString();
 }
 
-public record MessageCompletion(string message);
+public record MessageCompletion(string message, string model);

@@ -23,13 +23,14 @@ export class ChatComponent {
 
   constructor() {
     this.chatStore.messages();
-    this.chatStore.setMessage('Hi!, How can I help you today? ✨', 'assistant');
+    if (this.chatStore.messages().length === 0)
+      this.chatStore.setMessage('Hi!, How can I help you today? ✨', 'assistant');
   }
 
   sendMessage(messageContent: string) {
     if (messageContent.trim()) {
       this.chatStore.setMessage(messageContent.trim(), 'user');
-      this.chatStore.sendMessage(messageContent);
+      this.chatStore.sendMessage({ message: messageContent, model: this.selectedModel}, this.selectedProvider);
       this.currentMessage = '';
     }
   }

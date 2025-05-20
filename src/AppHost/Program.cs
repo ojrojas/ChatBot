@@ -11,7 +11,7 @@ var launchProfileName = ShouldUseHttpForEndpoints(configuration) ? "http" : "htt
 var ollama = builder.AddOllama("ollama")
 .WithVolume("ollama-store", "/root/.ollama").WithOpenWebUI();
 
-var llamaModel = ollama.AddModel("llama", "llama3.2");
+var llamaModel = ollama.AddModel("llama", "qwen2.5-coder:3b");
 
 var seq = builder.AddSeq("seq");
 

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace BolunderErp.BuildingBlocks.Loggers;
+namespace ChatBot.BuildingBlocks.Loggers;
 
 public static class LoggersExtensions
 {

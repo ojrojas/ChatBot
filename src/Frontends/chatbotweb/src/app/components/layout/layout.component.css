@@ -1,5 +1,6 @@
 .container {
   display: grid;
+  width: 100%;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: "workspace-container chat-container chat-container chat-container chat-container";
   background-color: #2f363d;
