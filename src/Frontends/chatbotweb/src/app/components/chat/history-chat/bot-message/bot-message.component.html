@@ -5,8 +5,7 @@
         <span class="sender">{{ message.role === 'assistant' ? 'Bot' : message.role }}</span>
         <!-- <span class="timestamp">{{ message.date.toLocaleString() }}</span> -->
       </div>
-      <div class="message-content">
-        {{ message.content }}
+      <div class="message-content" [innerHTML]="message.content">
       </div>
     </div>
   </div>

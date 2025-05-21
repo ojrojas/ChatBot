@@ -1,20 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matAttachFileOutline, matDownloadOutline, matMicOutline } from "@ng-icons/material-icons/outline";
 import { ChatBotStore } from '../../../store/chatbot.store';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelect, MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-form-chat',
   imports: [
     CommonModule,
-    NgIcon,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
+    MatButtonModule
   ],
   templateUrl: './form-chat.component.html',
-  styleUrl: './form-chat.component.css',
-  viewProviders: [provideIcons({ matAttachFileOutline, matDownloadOutline, matMicOutline })]
+  styleUrl: './form-chat.component.scss',
 })
 export class FormChatComponent {
   readonly chatStore = inject(ChatBotStore);
@@ -27,7 +37,6 @@ export class FormChatComponent {
 
   providers: string[] = ['Chat', 'Generate'];
   models: string[] = [];
-  disableTextArea = true;
 
   constructor() {
     this.chatStore.getListModels();
@@ -38,18 +47,14 @@ export class FormChatComponent {
     this.messageInput = '';
   }
 
-  onProviderSelectChange(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    this.providerChangeEvent.emit(target.value);
-    if(this.selectedModel.length> 1 && this.selectedProvider.length>1)
-        this.disableTextArea = false;
+  onProviderSelectChange(select: MatSelectChange) {
+    console.log("provider selected:", select);
+    this.providerChangeEvent.emit(select.value);
   }
 
-  onModelSelectChange(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    this.modelChangeEvent.emit(target.value);
-    if(this.selectedModel.length> 1 && this.selectedProvider.length>1)
-        this.disableTextArea = false;
+  onModelSelectChange(select: MatSelectChange) {
+    console.log("model selected: ", select);
+    this.modelChangeEvent.emit(select.value);
   }
 
   onKeyPress(event: KeyboardEvent) {

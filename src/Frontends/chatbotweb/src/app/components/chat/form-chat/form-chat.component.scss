@@ -1,0 +1,45 @@
+.message-form-card {
+  border-bottom: 1px solid #444c56;
+  display: grid;
+  grid-template-rows: 50px 100px 50px;
+  row-gap: 15px;
+  grid-template-areas:
+    "message-form-header"
+    "message-form-content"
+    "message-form-actions";
+}
+
+
+.form-textarea {
+  width: 100%;
+}
+
+mat-form-field textarea {
+  resize: none;
+}
+
+.message-form-header {
+  grid-area: message-form-header;
+}
+
+.message-for-content {
+  grid-area: message-for-content;
+}
+
+.message-form-actions {
+  grid-area: message-form-actions;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 50px;
+  margin-right: 50px;
+  grid-template-areas: "grouped-buttons . send-button";
+}
+
+.grouped-buttons {
+  grid-area: grouped-buttons;
+}
+
+.send-button {
+  grid-area: send-button;
+  justify-self: end;
+}

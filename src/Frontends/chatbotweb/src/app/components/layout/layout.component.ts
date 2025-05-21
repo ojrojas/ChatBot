@@ -18,7 +18,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatToolbarModule
   ],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
   showFiller = false;

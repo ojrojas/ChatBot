@@ -1,37 +1,36 @@
-<div class="message-form-card">
-  <div class="card">
-      <div class="form-header">
-          <div class="dropdown-container">
-              <label for="provider">Mode:</label>
-              <select id="provider" [ngModel]="selectedProvider" (change)="onProviderSelectChange($event)">
-                  <option *ngFor="let provider of providers" [value]="provider">{{ provider }}</option>
-              </select>
-          </div>
-          <div class="dropdown-container">
-              <label for="model">Model:</label>
-              <select id="model" [ngModel]="selectedModel" (change)="onModelSelectChange($event)">
-                   <option *ngFor="let model of chatStore.models()" [value]="model.name">{{ model.name }}</option>
-              </select>
-          </div>
+<mat-card appearance="outlined" class="message-form-card">
+  <mat-card-header class="message-form-header">
+    <mat-form-field appearance="outline">
+      <mat-label for="provider">Mode</mat-label>
+      <mat-select id="provider" [ngModel]="selectedProvider" (selectionChange)="onProviderSelectChange($event)">
+        <mat-option *ngFor="let provider of providers" [value]="provider">{{ provider }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label for="model">Model</mat-label>
+      <mat-select id="model" [ngModel]="selectedModel" (selectionChange)="onModelSelectChange($event)">
+        <mat-option *ngFor="let model of chatStore.models()" [value]="model.name">{{ model.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-header>
+  <mat-card-content class="message-form-content">
+    <mat-form-field class="form-textarea" appearance="outline">
+      <mat-label for="model">Ask me anything... 📝</mat-label>
+      <textarea matInput id="message-input" rows="4" [(ngModel)]="messageInput"
+        (keypress)="onKeyPress($event)"></textarea>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-footer class="message-form-actions">
+      <div class="grouped-buttons">
+        <button mat-mini-fab
+          aria-label="Example icon button with a delete icon"><mat-icon>attachment</mat-icon></button>
+        <button mat-mini-fab><mat-icon>mic</mat-icon></button>
+        <button mat-mini-fab><mat-icon>download</mat-icon></button>
       </div>
-
-      <div class="form-textarea">
-          <textarea
-              id="message-input"
-              placeholder="Ask me anything... 📝"
-              [(ngModel)]="messageInput"
-              (keypress)="onKeyPress($event)"
-              disabled="{{disableTextArea}}"
-          ></textarea>
+      <div class="send-button">
+        <button mat-mini-fab exntend  (click)="onSendMessage()">
+          <mat-icon>send</mat-icon>
+        </button>
       </div>
-
-      <div class="form-buttons">
-          <div class="grouped-buttons">
-              <button><ng-icon name="matAttachFileOutline"/></button>
-              <button><ng-icon name="matMicOutline"/></button>
-              <button><ng-icon name="matDownloadOutline"/></button>
-          </div>
-          <button class="send-button" (click)="onSendMessage()">Send</button>
-      </div>
-  </div>
-</div>
+  </mat-card-footer>
+</mat-card>

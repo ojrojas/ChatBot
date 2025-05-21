@@ -1,0 +1,42 @@
+.drawer-container {
+  height: 100vh;
+  background-color: gainsboro;
+}
+
+.sidenav-content {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px;
+  grid-template-areas:
+    "sidenav-menu sidenav-menu"
+    "sidenav-content-app sidenav-content-app"
+    "sidenav-content-app sidenav-content-app";
+  justify-items: stretch;
+}
+
+.sidenav-menu {
+  grid-area: sidenav-menu;
+}
+
+.sidenav-content-app {
+  grid-area: sidenav-content-app;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "chat-container "
+}
+
+.workspace-container {
+  grid-area: workspace-container;
+  background-color: #24292e;
+  height: auto;
+}
+
+.chat-container {
+  grid-area: chat-container;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}

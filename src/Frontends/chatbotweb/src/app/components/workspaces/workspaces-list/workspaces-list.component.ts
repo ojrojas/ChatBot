@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   templateUrl: './workspaces-list.component.html',
-  styleUrl: './workspaces-list.component.css'
+  styleUrl: './workspaces-list.component.scss'
 })
 export class WorkspacesListComponent {
   workspaces = ['1'];

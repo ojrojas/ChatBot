@@ -13,7 +13,7 @@ import { FormChatComponent } from './form-chat/form-chat.component';
     FormsModule
   ],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.css'
+  styleUrl: './chat.component.scss'
 })
 export class ChatComponent {
   currentMessage: string = '';
