@@ -2,13 +2,13 @@
   <mat-card-header class="message-form-header">
     <mat-form-field appearance="outline">
       <mat-label for="provider">Mode</mat-label>
-      <mat-select id="provider" [ngModel]="selectedProvider" (change)="onProviderSelectChange($event)">
+      <mat-select id="provider" [ngModel]="selectedProvider" (selectionChange)="onProviderSelectChange($event)">
         <mat-option *ngFor="let provider of providers" [value]="provider">{{ provider }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label for="model">Model</mat-label>
-      <mat-select id="model" [ngModel]="selectedModel" (change)="onModelSelectChange($event)">
+      <mat-select id="model" [ngModel]="selectedModel" (selectionChange)="onModelSelectChange($event)">
         <mat-option *ngFor="let model of chatStore.models()" [value]="model.name">{{ model.name }}</mat-option>
       </mat-select>
     </mat-form-field>

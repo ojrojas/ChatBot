@@ -7,6 +7,7 @@ import { withLogger } from "./logger.store";
 import { StorageService } from "../services/storage.service";
 import { IModel } from "../core/models/model-ia.model";
 import { IModelCompletion } from "../core/models/model.completion";
+import hljs from 'highlight.js';
 
 type ChatBotState = {
   messages: IMessage[];

@@ -7,7 +7,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelect, MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -47,15 +47,14 @@ export class FormChatComponent {
     this.messageInput = '';
   }
 
-  onProviderSelectChange(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    console.log("provider selected:", target);
-    this.providerChangeEvent.emit(target.value);
+  onProviderSelectChange(select: MatSelectChange) {
+    console.log("provider selected:", select);
+    this.providerChangeEvent.emit(select.value);
   }
 
-  onModelSelectChange(event: Event) {
-    const target = event.target as HTMLSelectElement;
-    this.modelChangeEvent.emit(target.value);
+  onModelSelectChange(select: MatSelectChange) {
+    console.log("model selected: ", select);
+    this.modelChangeEvent.emit(select.value);
   }
 
   onKeyPress(event: KeyboardEvent) {
