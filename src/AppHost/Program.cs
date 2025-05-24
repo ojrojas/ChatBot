@@ -13,10 +13,15 @@ var ollama = builder.AddOllama("ollama")
 
 var llamaModel = ollama.AddModel("llama", "qwen2.5-coder:3b");
 
+
 var seq = builder.AddSeq("seq");
 
 var apiChatBot = builder.AddProject<Projects.ApiChatBot>("api-chatbot", launchProfileName);
 var mcpServer = builder.AddProject<Projects.MCPServer>("mcp-server", launchProfileName);
+var mpcInspector = builder.AddNpmApp("mcp-inspector", "../Frontends/inspector");
+
+mpcInspector.WithHttpEndpoint(env: "PORT")
+.WithReference(mcpServer);
 
 apiChatBot.WithReference(redis)
 .WaitFor(llamaModel)

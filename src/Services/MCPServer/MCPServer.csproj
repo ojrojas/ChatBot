@@ -15,4 +15,10 @@
     <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.2.0-preview.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\Loggers\Loggers.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\ServiceDefaults\ChatBot.ServiceDefaults.csproj" />
+  </ItemGroup>
+
 </Project>

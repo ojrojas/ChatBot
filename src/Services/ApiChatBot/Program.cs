@@ -19,6 +19,13 @@ var ollamaConnection = new OllamaConnection(connectionString);
 
 builder.Services.AddServiceDIInjection(ollamaConnection);
 
+builder.AddSeqEndpoint("seq");
+builder.Services.AddSerilog();
+builder.Services.AddLogging(options =>
+{
+    options.AddSeq();
+});
+
 #pragma warning disable SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 kernel.AddOllamaChatCompletion(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));
 kernel.AddOllamaTextGeneration(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));

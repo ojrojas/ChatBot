@@ -15,7 +15,7 @@ namespace ChatBot.Services.MCPServer.Repository
 
         private static RedisKey GetTodoKey(Guid userId) => TodoKeyPrefix.Append(userId.ToString());
 
-        public async ValueTask<Todo> UpdateTodoAsync(Guid Id, Todo todo, CancellationToken cancellationToken)
+        public async ValueTask<Todo> UpdateTodoAsync(Todo todo, CancellationToken cancellationToken)
         {
             var json = JsonSerializer.SerializeToUtf8Bytes(todo, TodoSerializationContext.Default.Todo);
             var created = await database.StringSetAsync(GetTodoKey(todo.Id), json);
@@ -40,17 +40,17 @@ namespace ChatBot.Services.MCPServer.Repository
             return JsonSerializer.Deserialize(data.Span, TodoSerializationContext.Default.Todo);
         }
 
-        public async ValueTask<Todo> GetAllTodoAsync(CancellationToken cancellationToken)
+        public async ValueTask<IEnumerable<Todo>> GetAllTodoAsync(CancellationToken cancellationToken)
         {
             using var data = await database.StringGetLeaseAsync(TodoKeyPrefix);
 
             if (data is null || data.Length == 0)
                 return null;
 
-            return JsonSerializer.Deserialize(data.Span, TodoSerializationContext.Default.Todo);
+            return JsonSerializer.Deserialize<IEnumerable<Todo>>(data.Span);
         }
 
-        public async ValueTask<bool> DeleteTodoByIdAsync(Guid Id, Todo todo, CancellationToken cancellationToken)
+        public async ValueTask<bool> DeleteTodoByIdAsync(Guid Id, CancellationToken cancellationToken)
         {
             return await database.KeyDeleteAsync(GetTodoKey(Id));
         }

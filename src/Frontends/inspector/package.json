@@ -1,0 +1,16 @@
+{
+  "name": "inspector-mcp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "run-script-os",
+    "start:win32": "CLIENT_PORT=%PORT% npx @modelcontextprotocol/inspector node build/index.js",
+    "start:default": "CLIENT_PORT=$PORT npx @modelcontextprotocol/inspector node build/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "run-script-os": "^1.1.6"
+  }
+}

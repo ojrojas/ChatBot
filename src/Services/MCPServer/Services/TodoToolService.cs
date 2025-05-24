@@ -8,33 +8,23 @@ public class TodoToolService(ILogger<TodoToolService> logger, ITodoRepository to
     readonly ILogger<TodoToolService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     readonly ITodoRepository _todoRepository = todoRepository ?? throw new ArgumentNullException(nameof(todoRepository));
 
-    public ValueTask<Todo> CreateTodoAsync(Todo todo, CancellationToken cancellationToken)
+    public async ValueTask<bool> DeleteTodoByIdAsync(Guid Id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _todoRepository.DeleteTodoByIdAsync(Id, cancellationToken);
     }
 
-    public ValueTask<Todo> DeleteTodoByIdAsync(Guid Id, Todo todo, CancellationToken cancellationToken)
+    public async ValueTask<IEnumerable<Todo>> GetAllTodoAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _todoRepository.GetAllTodoAsync(cancellationToken);
     }
 
-    public ValueTask<Todo> DoneTodoAsync(Todo todo, CancellationToken cancellationToken)
+    public async ValueTask<Todo> GetTodoByIdAsync(Guid Id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _todoRepository.GetTodoByIdAsync(Id, cancellationToken);
     }
 
-    public ValueTask<Todo> GetAllTodoAsync(CancellationToken cancellationToken)
+    public async ValueTask<Todo> UpdateTodoAsync(Todo todo, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
-    }
-
-    public ValueTask<Todo> GetTodoByIdAsync(Guid Id, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
-
-    public ValueTask<Todo> UpdateTodoAsync(Guid Id, Todo todo, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
+        return await _todoRepository.UpdateTodoAsync(todo, cancellationToken);
     }
 }

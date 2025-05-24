@@ -30,7 +30,27 @@
                 "NODE_ENV": "production",
                 "services__apichatbot__http__0": "{apichatbot.bindings.http.url}",
                 "services__apichatbot__https__0": "{apichatbot.bindings.https.url}",
-                "PORT": "{webecommerce.bindings.http.targetPort}"
+                "PORT": "{chatbotweb.bindings.http.targetPort}"
+            },
+            "bindings": {
+                "http": {
+                    "scheme": "http",
+                    "protocol": "tcp",
+                    "transport": "http",
+                    "targetPort": 8000,
+                    "external": true
+                }
+            }
+        },
+         "inspector": {
+            "type": "dockerfile.v0",
+            "path": "../Frontends/inspector/Dockerfile",
+            "context": "../Frontends/inspector",
+            "env": {
+                "NODE_ENV": "production",
+                "services__apichatbot__http__0": "{apichatbot.bindings.http.url}",
+                "services__apichatbot__https__0": "{apichatbot.bindings.https.url}",
+                "PORT": "{inspector.bindings.http.targetPort}"
             },
             "bindings": {
                 "http": {
