@@ -1,64 +1,53 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using ChatBot.Services.MCPServer.Data;
 using ChatBot.Services.MCPServer.Interfaces;
 using ChatBot.Services.MCPServer.Models;
-using StackExchange.Redis;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChatBot.Services.MCPServer.Repository
 {
-    public class TodoRepository(ILogger<TodoRepository> logger, IConnectionMultiplexer redis) : ITodoRepository
+    public class TodoRepository(ILogger<TodoRepository> logger, TodoDbContext context) : ITodoRepository
     {
-        private readonly IDatabase database = redis.GetDatabase();
-
-        private static readonly RedisKey TodoKeyPrefix = "/todo/"u8.ToArray();
+        private readonly TodoDbContext _context = context ?? throw new ArgumentNullException(nameof(context));
         private readonly ILogger<TodoRepository> logger = logger;
 
-        private static RedisKey GetTodoKey(Guid userId) => TodoKeyPrefix.Append(userId.ToString());
-
-        public async ValueTask<Todo> UpdateTodoAsync(Todo todo, CancellationToken cancellationToken)
+        public async ValueTask<Todo> UpdateTodoAsync(Guid id, Todo todo, CancellationToken cancellationToken)
         {
-            var json = JsonSerializer.SerializeToUtf8Bytes(todo, TodoSerializationContext.Default.Todo);
-            var created = await database.StringSetAsync(GetTodoKey(todo.Id), json);
+            var itemToUpdate = await GetTodoByIdAsync(id, cancellationToken);
+            ArgumentNullException.ThrowIfNull(itemToUpdate);
+            itemToUpdate.Descriptions = todo.Descriptions;
+            itemToUpdate.IsDone = todo.IsDone;
+            itemToUpdate.DoneOn = todo.DoneOn;
 
-            if (!created)
-            {
-                logger.LogInformation("Problem occurred persisting the item.");
-                return null;
-            }
-
-            logger.LogInformation("Todo item persisted successfully.");
-            return await GetTodoByIdAsync(todo.Id, cancellationToken);
+            var entity = _context.Todos.Update(itemToUpdate);
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+                return entity.Entity;
+            else return null;
         }
 
-        public async ValueTask<Todo> GetTodoByIdAsync(Guid Id, CancellationToken cancellationToken)
+        public async ValueTask<Todo> GetTodoByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            using var data = await database.StringGetLeaseAsync(GetTodoKey(Id));
-
-            if (data is null || data.Length == 0)
-                return null;
-
-            return JsonSerializer.Deserialize(data.Span, TodoSerializationContext.Default.Todo);
+            return await _context.Todos.FindAsync(new object[] { id }, cancellationToken);
         }
 
         public async ValueTask<IEnumerable<Todo>> GetAllTodoAsync(CancellationToken cancellationToken)
         {
-            using var data = await database.StringGetLeaseAsync(TodoKeyPrefix);
-
-            if (data is null || data.Length == 0)
-                return null;
-
-            return JsonSerializer.Deserialize<IEnumerable<Todo>>(data.Span);
+            return await _context.Todos.ToListAsync();
         }
 
-        public async ValueTask<bool> DeleteTodoByIdAsync(Guid Id, CancellationToken cancellationToken)
+        public async ValueTask<bool> DeleteTodoByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            return await database.KeyDeleteAsync(GetTodoKey(Id));
+            var todoToRemoved = await GetTodoByIdAsync(id, cancellationToken);
+            var result = _context.Todos.Remove(todoToRemoved).Entity != null;
+            await _context.SaveChangesAsync(cancellationToken);
+            return result;
         }
-    }
 
-    [JsonSerializable(typeof(Todo))]
-    [JsonSourceGenerationOptions(PropertyNameCaseInsensitive = true)]
-    public partial class TodoSerializationContext : JsonSerializerContext
-    {
+        public async ValueTask<Todo> CreateTodoAsync(Todo todo, CancellationToken cancellationToken)
+        {
+            var entity = await _context.Todos.AddAsync(todo, cancellationToken);
+            if (await _context.SaveChangesAsync(cancellationToken) > 0)
+                return entity.Entity;
+            else return null;
+        }
     }
 }

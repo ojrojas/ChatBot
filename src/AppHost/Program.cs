@@ -4,8 +4,6 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
 
-var redis = builder.AddRedis("redis");
-
 var launchProfileName = ShouldUseHttpForEndpoints(configuration) ? "http" : "https";
 
 var ollama = builder.AddOllama("ollama")
@@ -13,27 +11,35 @@ var ollama = builder.AddOllama("ollama")
 
 var llamaModel = ollama.AddModel("llama", "qwen2.5-coder:3b");
 
+var postgres = builder.AddPostgres("postgres")
+.WithImage("ankane/pgvector")
+    .WithImageTag("latest").WithPgAdmin();
+
+var todoDb = postgres.AddDatabase("todoDb");
+
 
 var seq = builder.AddSeq("seq");
 
 var apiChatBot = builder.AddProject<Projects.ApiChatBot>("api-chatbot", launchProfileName);
-var mcpServer = builder.AddProject<Projects.MCPServer>("mcp-server", launchProfileName);
+var mcpServer = builder.AddProject<Projects.MCPServer>("mcpServer", launchProfileName);
 var mpcInspector = builder.AddNpmApp("mcp-inspector", "../Frontends/inspector");
 
 mpcInspector.WithHttpEndpoint(env: "PORT")
 .WithReference(mcpServer);
 
-apiChatBot.WithReference(redis)
+mcpServer
+.WaitFor(todoDb)
+.WithReference(todoDb)
+.WithReference(seq);
+
+apiChatBot
 .WaitFor(llamaModel)
+.WaitFor(mcpServer)
 .WithReference(seq)
 .WithReference(llamaModel)
 .WithReference(mcpServer)
+.WithEnvironment("MCPServer", mcpServer.GetEndpoint(launchProfileName))
 .WithReference(ollama.GetEndpoint(launchProfileName));
-
-mcpServer.WithReference(apiChatBot)
-.WithReference(redis)
-.WaitFor(apiChatBot)
-.WithReference(seq);
 
 var webChatBot = builder.AddNpmApp("chatbotweb", "../Frontends/chatbotweb");
 

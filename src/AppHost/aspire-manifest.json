@@ -22,6 +22,28 @@
                 }
             }
         },
+        "mcpServer": {
+            "type": "project.v0",
+            "path": "../Services/MCPServer/MCPServer.csproj",
+            "env": {
+                "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+                "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+                "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
+                "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true"
+            },
+            "bindings": {
+                "http": {
+                    "scheme": "http",
+                    "protocol": "tcp",
+                    "transport": "http"
+                },
+                "https": {
+                    "scheme": "https",
+                    "protocol": "tcp",
+                    "transport": "http"
+                }
+            }
+        },
         "chatbotweb": {
             "type": "dockerfile.v0",
             "path": "../Frontends/chatbotweb/Dockerfile",
@@ -42,7 +64,7 @@
                 }
             }
         },
-         "inspector": {
+        "inspector": {
             "type": "dockerfile.v0",
             "path": "../Frontends/inspector/Dockerfile",
             "context": "../Frontends/inspector",

@@ -1,3 +1,5 @@
+using ModelContextProtocol.Client;
+
 var builder = WebApplication.CreateBuilder(args);
 IConfiguration configuration = builder.Configuration;
 
@@ -31,6 +33,7 @@ kernel.AddOllamaChatCompletion(ollamaConnection.Model, new Uri(ollamaConnection.
 kernel.AddOllamaTextGeneration(ollamaConnection.Model, new Uri(ollamaConnection.Endpoint));
 #pragma warning restore SKEXP0070 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +41,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    await using var MPCCLient = await McpClientFactory.CreateAsync(new SseClientTransport(new SseClientTransportOptions
+    {
+        Name = "MCPServer",
+        Endpoint = new Uri(configuration["MCPServer"].ToString()),
+        UseStreamableHttp = true
+    }));
+
+    var tools = await MPCCLient.ListToolsAsync();
 }
 
 app.UseHttpsRedirection();
