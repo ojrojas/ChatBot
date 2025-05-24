@@ -16,12 +16,19 @@ var llamaModel = ollama.AddModel("llama", "qwen2.5-coder:3b");
 var seq = builder.AddSeq("seq");
 
 var apiChatBot = builder.AddProject<Projects.ApiChatBot>("api-chatbot", launchProfileName);
+var mcpServer = builder.AddProject<Projects.MCPServer>("mcp-server", launchProfileName);
 
 apiChatBot.WithReference(redis)
 .WaitFor(llamaModel)
 .WithReference(seq)
 .WithReference(llamaModel)
+.WithReference(mcpServer)
 .WithReference(ollama.GetEndpoint(launchProfileName));
+
+mcpServer.WithReference(apiChatBot)
+.WithReference(redis)
+.WaitFor(apiChatBot)
+.WithReference(seq);
 
 var webChatBot = builder.AddNpmApp("chatbotweb", "../Frontends/chatbotweb");
 

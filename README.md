@@ -36,6 +36,7 @@ This project demonstrates a fully functional chatbot that can engage in conversa
 *   Sends messages to the user
 *   Receives responses from the bot
 *   Utilizes OLAMA in local for models and Docker for containerization
+*   New MCP server checkout http://localhost:port/openapi/v1.json
 
 **Setup and Installation**
 

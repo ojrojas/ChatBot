@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Services\ApiChatBot\ApiChatBot.csproj" />
+    <ProjectReference Include="..\Services\MCPServer\MCPServer.csproj" />
   </ItemGroup>
 
   <Target Name="RestoreNpm" BeforeTargets="Build" Condition=" '$(DesignTimeBuild)' != 'true' ">

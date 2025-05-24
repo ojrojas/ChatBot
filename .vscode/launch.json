@@ -1,14 +1,5 @@
 {
     "version": "0.2.0",
-    "compounds": [
-        {
-            "name": "Compound",
-            "configurations": [
-                ".NET Core Launch (AppHost)",
-                ".NET Core Launch (ApiChatBot)",
-            ]
-        }
-    ],
     "configurations": [
         {
             "name": ".NET Core Launch (ApiChatBot)",
@@ -22,8 +13,12 @@
             "pipeTransport": {
                 "pipeCwd": "${workspaceFolder}",
                 "pipeProgram": "zsh",
-                "pipeArgs": ["-c"],
-                "debugerArgs": ["--interpreter=vscode"],
+                "pipeArgs": [
+                    "-c"
+                ],
+                "debugerArgs": [
+                    "--interpreter=vscode"
+                ],
                 "debuggerPath": "~/Apps/netcoredbg/netcoredbg",
                 "quoteArgs": true
             },
@@ -56,13 +51,17 @@
             "pipeTransport": {
                 "pipeCwd": "${workspaceFolder}",
                 "pipeProgram": "zsh",
-                "pipeArgs": ["-c"],
-                "debugerArgs": ["--interpreter=vscode"],
+                "pipeArgs": [
+                    "-c"
+                ],
+                "debugerArgs": [
+                    "--interpreter=vscode"
+                ],
                 "debuggerPath": "~/Apps/netcoredbg/netcoredbg",
                 "quoteArgs": true
             },
             "env": {
-                "ASPNETCORE_URLS":"http://localhost:19210",
+                "ASPNETCORE_URLS": "http://localhost:19210",
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "DOTNET_ENVIRONMENT": "Development",
                 "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:19210",
