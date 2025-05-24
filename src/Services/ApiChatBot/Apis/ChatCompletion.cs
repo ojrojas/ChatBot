@@ -1,4 +1,3 @@
-
 namespace ChatBot.Services.ApiChatBot.Apis;
 
 public static class ChatCompletionApi
@@ -11,10 +10,9 @@ public static class ChatCompletionApi
         api.MapGet("/api/models", GetModels).WithName("ChatBotModels").WithOpenApi();
         api.MapPost("/api/generate", GenerateContent).WithName("ChatBotGenerate").WithOpenApi();
 
-
         return api;
-
     }
+
     static async ValueTask<IEnumerable<Model>> GetModels([FromServices] IChatBotService service)
     {
         return await service.GetModelsAsync();

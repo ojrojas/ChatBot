@@ -1,0 +1,85 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (ApiChatBot)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/Services/ApiChatBot/bin/Debug/net9.0/ApiChatBot.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "zsh",
+                "pipeArgs": [
+                    "-c"
+                ],
+                "debugerArgs": [
+                    "--interpreter=vscode"
+                ],
+                "debuggerPath": "~/Apps/netcoredbg/netcoredbg",
+                "quoteArgs": true
+            },
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            // Use IntelliSense to find out which attributes exist for C# debugging
+            // Use hover for the description of the existing attributes
+            // For further information visit https://github.com/dotnet/vscode-csharp/blob/main/debugger-launchjson.md
+            "name": ".NET Core Launch (AppHost)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/src/AppHost/bin/Debug/net9.0/ChatBot.AppHost.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/AppHost",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}",
+                "pipeProgram": "zsh",
+                "pipeArgs": [
+                    "-c"
+                ],
+                "debugerArgs": [
+                    "--interpreter=vscode"
+                ],
+                "debuggerPath": "~/Apps/netcoredbg/netcoredbg",
+                "quoteArgs": true
+            },
+            "env": {
+                "ASPNETCORE_URLS": "http://localhost:19210",
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "DOTNET_ENVIRONMENT": "Development",
+                "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:19210",
+                "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "http://localhost:20035",
+                "ASPIRE_ALLOW_UNSECURED_TRANSPORT": "true",
+                "CHATBOT_USE_HTTP_ENDPOINTS": "1"
+            },
+            "logging": {
+                "moduleLoad": false,
+                "diagnosticsLog": {
+                    "protocolMessages": true
+                }
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}
