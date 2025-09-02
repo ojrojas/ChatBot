@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/src/">
+    <Project Path="src/AppHost/ChatBot.AppHost.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/Loggers/Loggers.csproj" />
+    <Project Path="src/BuildingBlocks/ServiceDefaults/ChatBot.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/">
+    <Project Path="src/Services/ApiChatBot/ApiChatBot.csproj" />
+    <Project Path="src/Services/MCPServer/MCPServer.csproj" />
+  </Folder>
+</Solution>

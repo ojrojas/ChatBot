@@ -9,7 +9,9 @@ var redis = builder.AddRedis("redis");
 var launchProfileName = ShouldUseHttpForEndpoints(configuration) ? "http" : "https";
 
 var ollama = builder.AddOllama("ollama")
-.WithVolume("ollama-store", "/root/.ollama").WithOpenWebUI();
+.WithGPUSupport(OllamaGpuVendor.Nvidia)
+.WithVolume("ollama-store", "/root/.ollama")
+.WithOpenWebUI();
 
 var llamaModel = ollama.AddModel("llama", "qwen2.5-coder:3b");
 

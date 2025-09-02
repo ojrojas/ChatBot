@@ -1,0 +1,56 @@
+<Project>
+  <PropertyGroup>
+    <!-- Enable central package management,
+    https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <AspnetVersion>9.0.8</AspnetVersion>
+    <MicrosoftExtensionsVersion>9.0.7</MicrosoftExtensionsVersion>
+    <AspireVersion>9.4.1</AspireVersion>
+    <AspireUnstablePackagesVersion>9.4.0-preview.1.25378.8</AspireUnstablePackagesVersion>
+    <GrpcVersion>2.71.0</GrpcVersion>
+    <OpenIddictVersion>7.0.0</OpenIddictVersion>
+    <ApiVersioningVersion>8.1.0</ApiVersioningVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.NodeJs" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Redis" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Seq" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
+    <PackageVersion Include="CommunityToolkit.Aspire.Hosting.Ollama" Version="9.7.1" />
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.AzureOpenAI" Version="1.64.0" />
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.64.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspnetVersion)" />
+    <PackageVersion Include="Microsoft.SemanticKernel" Version="1.64.0" />
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.Ollama" Version="1.64.0-alpha" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="9.0.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(AspnetVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="$(AspnetVersion)" />
+    <PackageVersion Include="ModelContextProtocol.AspNetCore" Version="0.3.0-preview.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Aspire.Seq" Version="$(AspireVersion)" />
+    <PackageVersion Include="Seq.Extensions.Logging" Version="8.0.0" />
+    <PackageVersion Include="Serilog" Version="4.3.0" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.0" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Seq" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.8.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.4.1" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.11.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.11.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.11.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.11.1" />
+  </ItemGroup>
+</Project>
